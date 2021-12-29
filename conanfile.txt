@@ -1,0 +1,6 @@
+[requires]
+flatbuffers/2.0.0
+boost/1.77.0
+
+[generators]
+cmake
