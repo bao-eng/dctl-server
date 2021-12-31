@@ -21,8 +21,10 @@ State DCTLEngine::NextState(const State &st,
 }
 
 void DCTLEngine::ProcessInput(const Input &inp) {
-  if (input_buffer_[inp.sequence].find(inp.player_id) ==
-      input_buffer_[inp.sequence].end()) {
+  if ((inp.sequence >= sequence_) &&
+      (players_in_game_.find(inp.player_id) != players_in_game_.end()) &&
+      (input_buffer_[inp.sequence].find(inp.player_id) ==
+       input_buffer_[inp.sequence].end())) {
     input_buffer_[inp.sequence][inp.player_id] = inp;
     if (inp.sequence == sequence_) {
       for (auto &i : players_in_game_) {
@@ -32,7 +34,7 @@ void DCTLEngine::ProcessInput(const Input &inp) {
         }
       }
       state_ = NextState(state_, input_buffer_.at(sequence_));
-
+      sequence_++;
       input_buffer_.erase(inp.sequence);
     }
   }
@@ -42,12 +44,10 @@ State CheckCollisions(const State &st) {
   State ns;
   ns.sequence = st.sequence;
   std::unordered_set<int> valid;
-  for(auto& i: st.snakes){
-    if(!IsSelfIntersecting(i)){
+  for (auto &i : st.snakes) {
+    if (!IsSelfIntersecting(i)) {
       valid.insert(i.player_id);
     }
   }
   
 }
-
-
