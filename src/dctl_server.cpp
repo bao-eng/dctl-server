@@ -61,8 +61,7 @@ int main() {
   st.snakes.push_back(s3);
   st.snakes.push_back(s4);
 
-  DCTLEngine game(kMapWidth, kMapHeight, kSpeed, dt, 60);
-  game.SetState(st);
+  DCTLEngine game(st, kMapWidth, kMapHeight, kSpeed, dt, 60);
 
   while (!WindowShouldClose())  // Detect window close button or ESC key
   {
