@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-#include <set>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -9,24 +7,18 @@
 
 class DCTLEngine {
  public:
-  DCTLEngine(float map_width, float map_height, float speed,
-             double dt, size_t max_length);
-  void SetState(const State &st);
-  State GetState()const;
+  DCTLEngine(const State &initial_state, float map_width, float map_height,
+             float speed, double dt, size_t max_length);
+  State GetState() const;
   void ProcessInput(const Input &inp);
-  State NextState(const State &st, const std::unordered_map<int, Input> &);
-  State CheckCollisions(const State &st);
 
  private:
   float map_width_;
   float map_height_;
   float speed_;
   size_t max_length_;
-
   uint32_t sequence_{0};
-  double dt_;           // = 0.01;
-  double current_time;  // = std::chrono::system_clock::now();
-  double accumulator;   // = 0.0;
+  double dt_;
   State state_;
   std::unordered_set<int> players_in_game_;
   std::unordered_map<uint32_t, std::unordered_map<int, Input>> input_buffer_;
