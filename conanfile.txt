@@ -2,6 +2,7 @@
 flatbuffers/2.0.0
 boost/1.77.0
 concurrentqueue/1.0.3
+cxxopts/3.0.0
 
 [generators]
 cmake
