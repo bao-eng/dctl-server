@@ -3,8 +3,6 @@ set(SOURCES dctl_server.cpp
             dctl_engine.cpp
             ./dctl-common/src/dctl_common.h
             ./dctl-common/src/dctl_common.cpp
-            ./dctl-common/src/dctl_raylib.h
-            ./dctl-common/src/dctl_raylib.cpp
             ./dctl-common/src/dctl_state_generated.h
             ./dctl-common/src/dctl_input_generated.h)
 
