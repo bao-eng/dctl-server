@@ -8,7 +8,7 @@
 class DCTLEngine {
  public:
   DCTLEngine(const State &initial_state, float map_width, float map_height,
-             float speed, double dt, size_t max_length);
+             float speed, double dt, size_t max_length, const float head_diameter, const float tail_width);
   State GetState() const;
   void ProcessInput(const Input &inp);
 
@@ -17,6 +17,8 @@ class DCTLEngine {
   float map_height_;
   float speed_;
   size_t max_length_;
+  float head_diameter_;
+  float tail_width_;
   uint32_t sequence_{0};
   double dt_;
   State state_;

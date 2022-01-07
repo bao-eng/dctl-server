@@ -2,7 +2,8 @@
 
 DCTLEngine::DCTLEngine(const State &initial_state, float map_width,
                        float map_height, float speed, double dt,
-                       size_t max_length)
+                       size_t max_length, const float head_diameter,
+                       const float tail_width)
     : state_(initial_state),
       sequence_(1),
       players_in_game_(GetPlayers(initial_state)),
@@ -10,7 +11,9 @@ DCTLEngine::DCTLEngine(const State &initial_state, float map_width,
       map_height_(map_height),
       speed_(speed),
       dt_(dt),
-      max_length_(max_length) {}
+      max_length_(max_length),
+      head_diameter_(head_diameter),
+      tail_width_(tail_width) {}
 
 State DCTLEngine::GetState() const { return state_; }
 
