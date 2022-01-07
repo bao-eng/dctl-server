@@ -1,16 +1,10 @@
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
-#include <chrono>
-#include <cmath>
-#include <cstddef>
-#include <deque>
 #include <iostream>
-#include <list>
 #include <vector>
 
 #include "dctl-common/src/dctl_common.h"
-#include "dctl-common/src/dctl_input_generated.h"
-#include "dctl-common/src/dctl_state_generated.h"
+#include "dctl-common/src/dctl_raylib.h"
 #include "dctl_engine.h"
 #include "raylib.h"
 #include "raymath.h"
@@ -26,7 +20,7 @@ const float kSpeed = 58.0f / 6;
 
 int main() {
   SetConfigFlags(FLAG_MSAA_4X_HINT);
-  InitWindow((kMapWidth + 1) * kScale, (kMapHeight + 1) * kScale, "snake");
+  InitWindow((kMapWidth + 1) * kScale, (kMapHeight + 1) * kScale, "dctl-server");
   SetTargetFPS(100);
 
   uint32_t sequence{0};
@@ -39,17 +33,17 @@ int main() {
   st.sequence = sequence;
   sequence++;
 
-  Vector2 p1{3, ((float)kMapHeight / 2)};
-  Snake s1{0, {p1, p1}, Dir::kRight, (Color){0, 255, 255, 255}};  // CYAN
-  Vector2 p2{kMapWidth - 3, (float)kMapHeight / 2};
-  Snake s2{1, {p2, p2}, Dir::kLeft, (Color){255, 0, 255, 255}};  // MAGENTA
-  Vector2 p3{(float)kMapWidth / 2, 3};
+  Vec2 p1{3, ((float)kMapHeight / 2)};
+  Snake s1{0, {p1, p1}, Dir::kRight, (Col){0, 255, 255, 255}};  // CYAN
+  Vec2 p2{kMapWidth - 3, (float)kMapHeight / 2};
+  Snake s2{1, {p2, p2}, Dir::kLeft, (Col){255, 0, 255, 255}};  // MAGENTA
+  Vec2 p3{(float)kMapWidth / 2, 3};
   Snake s3{2,
            {{p2.x - 10, p2.y - 10}, {p2.x - 10, p2.y - 10}},
            Dir::kDown,
-           (Color){0, 255, 0, 255}};  // GREEN
-  Vector2 p4{10 + (float)kMapWidth / 2, kMapHeight - 3};
-  Snake s4{3, {p4, p4}, Dir::kRight, (Color){255, 255, 0, 255}};  // YELLOW
+           (Col){0, 255, 0, 255}};  // GREEN
+  Vec2 p4{10 + (float)kMapWidth / 2, kMapHeight - 3};
+  Snake s4{3, {p4, p4}, Dir::kRight, (Col){255, 255, 0, 255}};  // YELLOW
 
   st.snakes.push_back(s1);
   // st.snakes.push_back(s2);
