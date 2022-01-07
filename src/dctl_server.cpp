@@ -59,6 +59,7 @@ int main() {
   // while (!WindowShouldClose())  // Detect window close button or ESC key
   while(1)
   {
+    socket_.wait(boost::asio::ip::udp::socket::wait_read);
     boost::array<char, 64000> recv_buffer_;
     while (socket_.available()) {
       boost::asio::ip::udp::endpoint ep;
