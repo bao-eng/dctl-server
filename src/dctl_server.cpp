@@ -4,10 +4,10 @@
 #include <vector>
 
 #include "dctl-common/src/dctl_common.h"
-#include "dctl-common/src/dctl_raylib.h"
+// #include "dctl-common/src/dctl_raylib.h"
 #include "dctl_engine.h"
-#include "raylib.h"
-#include "raymath.h"
+// #include "raylib.h"
+// #include "raymath.h"
 
 using boost::asio::ip::udp;
 
@@ -19,9 +19,9 @@ const float kTailWidth = 0.65;
 const float kSpeed = 58.0f / 6;
 
 int main() {
-  SetConfigFlags(FLAG_MSAA_4X_HINT);
-  InitWindow((kMapWidth + 1) * kScale, (kMapHeight + 1) * kScale, "dctl-server");
-  SetTargetFPS(100);
+  // SetConfigFlags(FLAG_MSAA_4X_HINT);
+  // InitWindow((kMapWidth + 1) * kScale, (kMapHeight + 1) * kScale, "dctl-server");
+  // SetTargetFPS(100);
 
   uint32_t sequence{0};
   double t = 0.0;
@@ -56,7 +56,8 @@ int main() {
   boost::asio::io_service io_service_;
   udp::socket socket_(io_service_, udp::endpoint(udp::v4(), 7777));
 
-  while (!WindowShouldClose())  // Detect window close button or ESC key
+  // while (!WindowShouldClose())  // Detect window close button or ESC key
+  while(1)
   {
     boost::array<char, 64000> recv_buffer_;
     while (socket_.available()) {
@@ -71,16 +72,16 @@ int main() {
       auto flat = PackState(game.GetState());
       socket_.send_to(boost::asio::buffer(flat.data(), flat.size()), ep);
     }
-    BeginDrawing();
+    // BeginDrawing();
 
-    Draw(game.GetState(), kMapWidth, kMapHeight, kScale, kHeadDiameter,
-         kTailWidth);
+    // Draw(game.GetState(), kMapWidth, kMapHeight, kScale, kHeadDiameter,
+    //      kTailWidth);
 
-    DrawFPS(10, 10);
-    EndDrawing();
+    // DrawFPS(10, 10);
+    // EndDrawing();
   }
 
-  CloseWindow();
+  // CloseWindow();
 
   return 0;
 }
