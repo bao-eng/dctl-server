@@ -1,23 +1,14 @@
 #include "dctl_engine.h"
 
-DCTLEngine::DCTLEngine(const State &initial_state, float map_width,
-                       float map_height, float speed, double dt,
-                       size_t max_length, const float head_diameter,
-                       const float tail_width)
+ServerEngine::ServerEngine(const State &initial_state, const Settings &settings)
     : state_(initial_state),
       sequence_(1),
       players_in_game_(GetPlayers(initial_state)),
-      map_width_(map_width),
-      map_height_(map_height),
-      speed_(speed),
-      dt_(dt),
-      max_length_(max_length),
-      head_diameter_(head_diameter),
-      tail_width_(tail_width) {}
+      settings_(settings) {}
 
-State DCTLEngine::GetState() const { return state_; }
+State ServerEngine::GetState() const { return state_; }
 
-void DCTLEngine::ProcessInput(const Input &inp) {
+void ServerEngine::ProcessInput(const Input &inp) {
   if ((inp.sequence >= sequence_) &&
       (players_in_game_.find(inp.player_id) != players_in_game_.end()) &&
       (input_buffer_[inp.sequence].find(inp.player_id) ==
@@ -30,10 +21,10 @@ void DCTLEngine::ProcessInput(const Input &inp) {
           return;
         }
       }
-      state_ = NextState(state_, input_buffer_.at(sequence_), dt_, speed_,
-                         max_length_);
+      state_ = NextState(state_, input_buffer_.at(sequence_), settings_.dt,
+                         settings_.speed, settings_.max_length);
       state_ = CheckCollisions(state_);
-      state_ = CheckBounds(state_, map_width_, map_height_);
+      state_ = CheckBounds(state_, settings_.map_width, settings_.map_height);
       players_in_game_ = GetPlayers(state_);
       sequence_++;
       input_buffer_.erase(inp.sequence);
