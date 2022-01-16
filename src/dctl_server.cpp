@@ -13,27 +13,6 @@ int main(int argc, char** argv) {
   settings.head_diameter = 1;
   settings.tail_width = 0.65;
 
-  // InputPack ininpp;
-  // ininpp.vec.emplace_back(0,0,false,false,false,false);
-  // ininpp.vec.emplace_back(1,1,false,false,false,false);
-
-  // auto p = PackInputPack(ininpp);
-  // auto r = UnpackMessage(p);
-  // if(std::holds_alternative<InputPack>(r)){
-  //   auto inpp = std::get<InputPack>(r);
-  //   std::cout << "inpp" << std::endl;
-  // }
-
-  // Request req;
-  // req.name="test";
-
-  // auto p = PackRequest(req);
-  // auto r = UnpackMessage(p);
-  // if(std::holds_alternative<Request>(r)){
-  //   auto inpp = std::get<Request>(r);
-  //   std::cout << "req" << std::endl;
-  // }
-
   while (1) {
     Server srv(settings, 7777);
     std::cout << "Server running" << std::endl;
